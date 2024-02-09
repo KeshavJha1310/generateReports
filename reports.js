@@ -7,7 +7,7 @@ import dotenv from "dotenv";
 
 dotenv.config({ path: ".env" });
 
-import { Attendance, Leave, Employee } from "./models/index.js";
+import { Attendance, Leave, Employee , Employer } from "./models/index.js";
 import { getTextMessage } from "./utils/languages.js";
 import {
   getTimeZoneAwareDate,
@@ -23,7 +23,7 @@ let mapImg, cameraImg, liveImg, calendarImg;
   liveImg = await imageToBase64(path.join(process.env.ROOT_PATH, "/templates/live.png"));
   calendarImg = await imageToBase64(path.join(process.env.ROOT_PATH, "/templates/calendar.png"));
 
-  await createLiveReport(919619565155, "65bb779306379711ff0d3c88", "English", "Asia/Kolkata", "yesterday");
+  await createLiveReport(918369644748, "65c342936224da6f822df9d5", "English", "Asia/Kolkata", "live");
 
   // await createLiveReport(918369644748, "6588d2a676407efaa9bd7160", "English", "yesterday");
   // createAllEmployeeReport(918369644748, "65b898f9111b1c826061ec60", "English");
@@ -47,8 +47,11 @@ let mapImg, cameraImg, liveImg, calendarImg;
 })();
 
 async function createLiveReport(recipientPhone, companyId, language, timeZone, type = "live") {
-  let day = moment.tz(new Date(), timeZone);
 
+  console.log("heeeeeeeeeeeeeee")
+  console.log(companyId)
+  let day = moment.tz(new Date(), timeZone);
+ console.log(day)
   if (type === "yesterday") {
     day = getPreviousDayDate(day);
   }
@@ -57,6 +60,8 @@ async function createLiveReport(recipientPhone, companyId, language, timeZone, t
   const currentDayEnd = new Date(day.year(), day.month(), day.date(), 23, 59, 59);
 
   const attendances = await Attendance.find(
+   
+
     {
       companyId,
       $and: [
@@ -73,7 +78,8 @@ async function createLiveReport(recipientPhone, companyId, language, timeZone, t
       companyId: 0,
     }
   );
-
+  console.log(attendances)
+ 
   const leaves = await Leave.find(
     {
       companyId,
