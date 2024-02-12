@@ -23,22 +23,22 @@ let mapImg, cameraImg, liveImg, calendarImg;
   liveImg = await imageToBase64(path.join(process.env.ROOT_PATH, "/templates/live.png"));
   calendarImg = await imageToBase64(path.join(process.env.ROOT_PATH, "/templates/calendar.png"));
 
-  await createLiveReport(918369644748, "65c342936224da6f822df9d5", "English", "Asia/Kolkata", "live");
+  // await createLiveReport(918369644748, "65c342936224da6f822df9d5", "English", "Asia/Kolkata", "live");
 
   // await createLiveReport(918369644748, "6588d2a676407efaa9bd7160", "English", "yesterday");
   // createAllEmployeeReport(918369644748, "65b898f9111b1c826061ec60", "English");
   // createEmployeeReport("current", "65854577eaee9435dfd76dcc", "English");
 
-  // await createDateRangeReport(
-  //   moment.tz(new Date(1704047400000), "Asia/Kolkata"),
-  //   moment.tz(new Date(1706812200000), "Asia/Kolkata"),
-  //   {
-  //     companyId: "65b898f9111b1c826061ec60",
-  //     language: "English",
-  //     companyName: "Canada",
-  //     companyNumber: 918369644748,
-  //   }
-  // );
+  await createDateRangeReport(
+    moment.tz(new Date(1704047400000), "Asia/Kolkata"),
+    moment.tz(new Date(1706812200000), "Asia/Kolkata"),
+    {
+      companyId: "65b898f9111b1c826061ec60",
+      language: "English",
+      companyName: "Canada",
+      companyNumber: 918369644748,
+    }
+  );
   // await sendDocument({
   //   caption: "Date Range Report",
   //   file_path: "./919820036070-dateRangeReport.pdf",
